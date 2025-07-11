@@ -117,7 +117,8 @@ def adminview_spot_details(spot_id):
 @app.route("/admin/view_spot_details/<spot_id>/view_details")
 def adminoccupied_spot_details(spot_id):
     reservedspot = ReserveSpot.query.filter_by(spot_id = spot_id).first()
-    cost_perhr = ParkingLot.query.filter_by(id = spot_id).first().price
+    lot_id = ParkingSpot.query.filter_by(id = spot_id).first().lot_id
+    cost_perhr = ParkingLot.query.filter_by(id = lot_id).first().price
     current_time = datetime.now()
     total_time_parked = ceil((current_time - reservedspot.parking_timestamp).seconds/3600)
     return render_template('occupiedSpotDetailsAdmin.html',reservedspot = reservedspot,cost = cost_perhr*total_time_parked)

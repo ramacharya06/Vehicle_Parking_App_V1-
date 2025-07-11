@@ -24,4 +24,4 @@ from controllers.admincontorllers import *
 from controllers.usercontrollers import *
     
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

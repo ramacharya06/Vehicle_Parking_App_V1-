@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occupied Parking Spot Details</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">Occupied Parking Spot Details</div>
+    <div id="mainpage" style = "display: flex;align-items: center;justify-content: center; border: 3px solid black; border-radius: 30px;">
+        <form action="" method="post">
+            <label for="id">ID:</label><br>
+            <input type="text" name="id" id="id" value = {{reservedspot.spot_id}} readonly><br>
+            <label for="customer_id">Customer ID:</label><br>
+            <input type="text" name="customer_id" id="customer_id" value= {{reservedspot.user_id}} readonly><br>
+            <label for="vehicle_no">Vehicle Number:</label><br>
+            <input type="text" name="vehicle_no" id="vehicle_no" value = {{reservedspot.vehicle_no}} readonly><br>
+            <label for="">Date and Time of Parking:</label><br>
+            <input type="text" name="" id="" value = '{{reservedspot.parking_timestamp}}' readonly><br>
+            <label for="cost">Est. Parking Cost:</label><br>
+            <input type="text" name="cost" id="cost" value= {{cost}} readonly><br>
+
+            <a href={{url_for('adminview_spot_details',spot_id = reservedspot.spot_id)}} style="text-decoration: none;"><input type="button" value="Close" style = "border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Parking Spot</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">
+        Book the Parking Spot
+    </div>
+    <div id="mainpage" style = "display: flex;align-items: center;justify-content: center; border: 3px solid black; border-radius: 30px;">
+
+        {% if not(spot_id) %}
+        <h4> No Parking Spot available</h4>
+        
+        {% else %}
+        <form action={{url_for('bookspot',user_id = user_id, lot_id = lot_id)}} method="post">
+            
+            <label for="spot_id">Spot ID:</label><br>
+            <input type="text" name="spot_id" id="spot_id" value = {{spot_id}} readonly><br>
+            <label for="lot_id">Lot ID:</label><br>
+            <input type="text" name="lot_id" id="lot_id" value = {{lot_id}} readonly><br>
+            <label for="user_id">User ID:</label><br>
+            <input type="text" name="user_id" id="user_id" value = {{user_id}} readonly><br>
+            <label for="vehicle_no">Vehicle Number:</label><br>
+            <input type="text" name="vehicle_no" id="vehicle_no" ><br>
+            
+            
+            <div style="display: flex;align-items: center;justify-content: center;">
+                <a href="" style="text-decoration: none;">
+                    <input type="submit" value="Reserve" style = "cursor:pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;">
+                </a>
+                
+                <a href={{url_for('userdashboard', user_id = user_id)}} style="text-decoration: none;"><input type="button" value="Cancel" style = "cursor:pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+                
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "header" style = "display: flex;align-items: center;justify-content: space-between;">
+        <h1 >Welcome to User</h1>
+        <nav>
+            <a href = {{url_for('userdashboard',user_id = user_id)}}>Home</a> | 
+            <a href={{url_for('summary',user_id = user_id)}}>Summary</a> | 
+            <a href={{url_for('login')}}>Logout</a>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div id = "list_of_recent_parking">
+            <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">
+                Recent Parking History
+            </div>
+            {% if recents %}
+            <table border = '1' style=" width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Location</th>
+                        <th>Vehicle Number</th>
+                        <th>Timestamp</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- "[(<ReserveSpot 1>, <ParkingSpot 1>, <ParkingLot 1>)]" -->
+                    {% for recent in recents%}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{recent[2].prime_location_name}}</td>
+                        <td>{{recent[0].vehicle_no}}</td>
+                        <td>{{recent[0].parking_timestamp}}</td>
+                        {% if recent[0].leaving_timestamp %}
+                        <td>Parked Out</td>
+                        {% else %}
+                        <td><a href= {{url_for('releasespot' ,id = recent[0].id)}}><input type="button" value="Release"></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <h2>No Recents Yet. Use our app Now.</h2>
+        {% endif %}
+        </div>
+        <hr style="padding:0px;margin:0px;border: 2px solid black;" >
+        <div id = "search_using_pincode" style="display:flex;justify-content: center; align-items: center;">
+            <form action={{url_for('userdashboard', user_id=user_id)}} method="post">
+                <label for="query">Search Parking @ pincode:</label>
+                <input type="text" name="query" id="query">
+                <input type="submit" value="Search available Parking Lots">
+            </form> 
+        </div>
+        <div>
+            {% if searches %}
+            <h1>Parking Lots at {{pincode}} </h1>
+            <table border = '1' style=" width: 100%;border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Location</th>
+                        <th>Cost/hr</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for search in searches %}
+                    <tr>
+                        <th>{{search.id}}</th>
+                        <td>{{search.prime_location_name}}</td>
+                        <td>{{search.price}}</td>
+                        <td><a href= "{{url_for('bookspot',user_id = user_id,lot_id = search.id)}}"><input type="button" value="Book"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No Parking Lot available for this pincode.</h4>
+            {% endif %}
+
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Delete Spot</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">View and Delete Parking Spot
+    </div>
+    <div id="mainpage" style = "display: flex;align-items: center;justify-content: center; border: 3px solid black; border-radius: 30px;">
+        <form action="" method="post">
+            <label for="id">ID:</label><br>
+            <input type="text" name="id" id="id" style="width: 280px;" readonly value={{spot.id}}><br>
+            <label for="status">Status:</label><br>
+            {% if (spot.status) %}
+            <input type="text" name="status" id="status" readonly style="width: 280px;" value="Available"><br>  
+            {% else %}
+            <input type="text" name="status" id="status" readonly style="width: 280px;" value="Occupied"><br>
+            {% endif %}
+            
+            <div style="display: flex;align-items: center;justify-content: center;">
+                {% if not(spot.status) %}
+                <a href={{url_for('adminoccupied_spot_details',spot_id = spot.id)}} style="text-decoration: none;"><input type="button" value="View details of User" style = "cursor:pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+                {% endif %}
+
+                <a href={{url_for('admindashboard')}} style="text-decoration: none;"><input type="button" value="Colse" style = "cursor:pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

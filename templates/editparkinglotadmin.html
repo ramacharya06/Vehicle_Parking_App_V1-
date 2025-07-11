@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Parking Lot</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">Edit Parking Lot
+    </div>
+    <div id="mainpage" style = "display: flex;align-items: center;justify-content: center; border: 3px solid black; border-radius: 30px;">
+        <form action={{url_for('adminedit_lot',lot_id = lot_id)}} method="post">
+
+            <label for="prime_location_name">Prime Location Name:</label><br>
+            <input type="text" name="prime_location_name" id="prime_location_name" value = {{prime_location_name}}><br>
+            <label for="address">Address:</label><br>
+            <textarea name="address" id="address" cols="30" rows="10">{{address}}</textarea><br>
+            <label for="pincode">Pincode:</label><br>
+            <input type="text" name="pincode" id="pincode" value = {{pincode}}><br>
+            <label for="price">Price (per Hour):</label><br>
+            <input type="text" name="price" id="price" value = {{price}}><br>
+            <label for="maximum_number_of_spots">Maximum Number of Spots:</label><br>
+            <input type="text" name="maximum_number_of_spots" id="maximum_number_of_spots" value = {{maximum_number_of_spots}}><br>
+            
+            {% if use_diff_loc %}
+            <h4 style="color:red">Use diffrent Prime Location Name</h4>
+            {% endif %}
+            {% if max_usr %}
+            <h4 style="color:red">More number of parking are reserved then the Maximum Spots specified.</h4>
+            {% endif %}
+
+            <div style="display: flex;align-items: center;justify-content: center;">
+                    <input type="submit" value="Update" style = "border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;">
+
+                <a href="" style="text-decoration: none;"><input type="button" value="Cancel" style = "border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

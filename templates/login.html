@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login</title>
+	</head>
+	<style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+		h4{
+			color:red;
+		}
+    </style>
+<body>
+	<form action={{url_for('login')}} method="post">
+		<h1>User Login</h1>
+		<label for="email">Email ID:</label><br>
+		<input type="text" name="email" id="email" required><br>
+		<label for="password">Password:</label><br>
+		<input type="password" name="password" id="password" required><br>
+		<input type="submit" value="Login"><br>
+
+	</form>
+	{% if worngpass %}
+	<h4>Wrong Password. Try Again</h4>
+	{% endif %}
+	{% if not_reg_user %}
+	<h4>User not registerd.</h4>
+	{% endif %}
+	<a href="{{url_for('register')}}">Create Account?</a>
+</body>
+</html>

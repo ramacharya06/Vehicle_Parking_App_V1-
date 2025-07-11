@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "header" style = "display: flex;align-items: center;justify-content: space-between;">
+        <h1 >Welcome to Admin</h1>
+        <nav>
+            <a href= {{url_for('admindashboard')}}>Home</a> | 
+            <a href= {{url_for('adminregistered_user')}}>Users</a> | 
+            <a href= {{url_for('adminsummary')}}>Summary</a> | 
+            <a href="/">Logout</a>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">Summary</div>
+    <div id = "summary" style="display:flex;justify-content:center;align-content:center">
+        <h3>Most used Parking Lots</h3>
+    </div>
+        <table border="1", style="border-collapse: collapse;width:100%;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>No. of Parkings Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i,j in parking_lots_occupied.items() %}
+                <tr>
+                    <td> {{i.id}} </td>
+                    <td> {{i.prime_location_name}} </td>
+                    <td> {{j}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div id = "summary2" style="display:flex;justify-content:center;align-content:center">
+        <h3>Most profitable Parking Lots</h3>
+        </div>
+        <table border="1", style="border-collapse: collapse;width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Cost Generated <br> (On Full Use)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in most_proficable_lots %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.prime_location_name }}</td>
+                    <td>{{ i.price*i.maximum_number_of_spots }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    
+</body>
+</html>

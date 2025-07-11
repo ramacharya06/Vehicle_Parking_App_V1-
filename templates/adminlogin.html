@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+        h4{
+            color:red;
+        }
+    </style>
+</head> 
+<body>
+    <form action={{url_for('adminlogin')}} method="post">
+        <!-- adminusername,password -->
+        <h1>Admin Login</h1>
+		<label for="password">Password:</label>
+		<input type="password" name="password" id="password" required><br>
+		<input type="submit" value="Login for Admin">
+    </form>
+    {% if worngpass %}
+	<h4>Wrong Password. Try Again</h4>
+	{% endif %}
+</body>
+</html>

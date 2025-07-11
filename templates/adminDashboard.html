@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard and Lot/Spot Management</title>
+    <style>
+        *:not(body) {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header" style="display: flex;align-items: center;justify-content: space-between;">
+        <h1>Welcome to Admin</h1>
+        <nav>
+            <a href={{url_for('admindashboard')}}>Home</a> |
+            <a href={{url_for('adminregistered_user')}}>Users</a> |
+            <a href= {{url_for('adminsummary')}} >Summary</a> |
+            <a href="/">Logout</a>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div
+            style="border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">
+            Parking Lot</div>
+        <div id="list_of_parking_lot">
+
+            {% for lot in parking_spots.keys() %}
+            <div
+                style="display:flex; border:solid brown 2px; border-radius: 5px; justify-content: center; align-items: center;">
+                <h4>Parking #{{loop.index}} </h4>
+                <nav>
+                    <a href={{url_for('adminedit_lot', lot_id=lot.id)}}>Edit</a>
+                    {% if not(parking_spots[lot]['occupiedspots']) %}
+                    | <a href={{url_for('admindelete', lot_id = lot.id)}} >Delete</a>
+                    {% endif %}
+                </nav>
+
+                <p>Occupied: ({{parking_spots[lot]['occupiedspots']}}/{{parking_spots[lot]['totalspots']}})</p>
+                <div style="display:flex;overflow:auto;width:300px;">
+
+                    {% for spot in parking_spots[lot]['spots'] %}
+
+                    <a href={{url_for('adminview_spot_details', spot_id=spot.id)}}
+                        style="text-decoration: none;"><button value="{{ spot.id }}"
+                            style="display:flex;justify-content: center;align-items: center;border-radius: 6px;width:25px;height:25px;background-color: {% if spot.status %}rgb(183, 255, 183){% else %}rgb(255, 183, 183){% endif %};cursor:pointer;">
+                            {{ 'T' if spot.status else 'F'}}
+                        </button></a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            </select>
+        </div>
+        <div style="display: flex;align-items: center;justify-content: center;padding:0px;margin:0px;">
+            <a href={{url_for('adminadd_lot')}} style="text-decoration: none;padding:0px;margin:0px;"><input
+                    type="button" value="+ Add Lot"
+                    style="border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;cursor: pointer;margin:0px;"></a>
+        </div>
+    </div>
+
+</body>
+
+</html>

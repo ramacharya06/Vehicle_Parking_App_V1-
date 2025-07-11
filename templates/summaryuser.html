@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "header" style = "display: flex;align-items: center;justify-content: space-between;">
+        <h1 >Welcome to User</h1>
+        <nav>
+            <a href = {{url_for('userdashboard', user_id = user_id)}}>Home</a> | 
+            <a href={{url_for('summary', user_id = user_id)}}>Summary</a> | 
+            <a href={{url_for('login')}}>Logout</a>
+        </nav>
+    </div>
+    <div id="mainpage">
+        <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">Summary</div>
+    <div id = "summary" style="display:flex;justify-content:center;align-content:center">
+        <h3>Total time spent in Parking</h3>
+    </div>
+        <table border="1", style="border-collapse: collapse;width:100%;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Time Parked</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i,j in lots_used.items() %}
+                <tr>
+                    <td> {{i.id}} </td>
+                    <td> {{i.prime_location_name}} </td>
+                    <td> {{j['totaltime']//3600}} hrs {{j['totaltime']%3600//60}} mins</td>
+                    <td> {{j['totalcost']}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+
+    
+</body>
+</html>

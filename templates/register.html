@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <form action={{url_for('register')}} method="post">
+        <!-- username,email,password,fullname -->
+        <h1>User SignUp</h1>
+		<label for="name">Full Name:</label><br>
+		<input type="text" name="name" id="name" required><br>
+		<label for="email">Email ID/Username:</label><br>
+		<input type="email" name="email" id="email" required><br>
+		<label for="password">Password:</label><br>
+		<input type="password" name="password" id="password" required><br>
+		<label for="address">Address:</label><br>
+		<textarea name="address" id="address" cols="30" rows="10" required></textarea><br>
+		<label for="pincode">Pin Code:</label><br>
+		<input type="text" name="pincode" id="pincode" required><br>
+		<input type="submit" value="Register"><br>
+
+    </form>
+    <a href={{url_for('login')}}>Login Here!</a>
+</body>
+</html>

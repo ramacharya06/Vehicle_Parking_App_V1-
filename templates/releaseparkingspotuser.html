@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release Parking Spot</title>
+    <style>
+        *:not(body){
+            padding:10px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div style = "border: solid 2px red; border-radius: 20px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 30px; font-weight: bolder;">
+        Release Parking Spot
+    </div>
+    <div id="mainpage" style = "display: flex;align-items: center;justify-content: center; border: 3px solid black; border-radius: 30px;">
+        <form action={{url_for('releasespot',id = releasedspot.id)}} method="post">
+
+            <label for="spot_id">Spot ID:</label><br>
+            <input type="text" name="spot_id" id="spot_id" value = {{releasedspot.spot_id}} readonly><br>
+            <label for="vehicle_no">Vehicle Number:</label><br>
+            <input type="text" name="vehicle_no" id="vehicle_no" value = {{releasedspot.vehicle_no}} readonly><br>
+            <label for="parking_time">Parking Time:</label><br>
+            <input type="text" name="parking_time" id="parking_time" readonly value = '{{releasedspot.parking_timestamp}}'><br>
+            <label for="release_time">Releasing Time:</label><br>
+            <input type="text" name="release_time" id="release_time" readonly value = '{{current_time}}'><br>
+            <label for="cost">Total Cost:</label><br>
+            <input type="text" name="cost" id="cost" value={{cost}} readonly><br>
+
+            <div style="display: flex;align-items: center;justify-content: center;">
+                <a href="" style="text-decoration: none;">
+                    <input type="submit" value="Release" style = "cursor: pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;">
+                </a>
+
+                <a href={{url_for('userdashboard',user_id = releasedspot.user_id)}} style="text-decoration: none;"><input type="button" value="Cancel" style = "cursor: pointer;border: solid 2px red; border-radius: 10px; display: flex; justify-content: center;align-items: center ;height:40px; font-size: 20px; font-weight: bolder; width:fit-content;"></a>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

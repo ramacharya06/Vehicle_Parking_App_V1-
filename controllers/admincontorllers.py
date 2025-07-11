@@ -80,7 +80,7 @@ def adminedit_lot(lot_id):
         price = request.form.get("price")
         maximum_number_of_spots = request.form.get("maximum_number_of_spots")
         update_lot = ParkingLot.query.filter_by(id = lot_id).first()
-        if ParkingLot.query.filter_by(prime_location_name = prime_location_name).first()and update_lot.prime_location_name != prime_location_name:
+        if ParkingLot.query.filter_by(prime_location_name = prime_location_name).first() and update_lot.prime_location_name != prime_location_name:
             return render_template("editparkinglotadmin.html",use_diff_loc = True) 
         update_lot.prime_location_name = prime_location_name  
         update_lot.address = address 

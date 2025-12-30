@@ -5,12 +5,16 @@ from models.database import db
 from models import user_model, parking_model 
 from models.user_model import *
 from models.parking_model import *
-from datetime import datetime 
+from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(current_dir, "testdb.sqlite3") 
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(current_dir, "testdb.sqlite3")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 db.init_app(app)
 app.app_context().push()
 with app.app_context():
